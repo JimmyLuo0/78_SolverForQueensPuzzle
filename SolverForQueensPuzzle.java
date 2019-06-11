@@ -59,15 +59,15 @@ public class SolverForQueensPuzzle {
     private void recordSolutionsStarted() {
 		nBoardsConsidered++;
         // Which has been requested, a base case or recursive case?
-		if(inProgress.lastIsNg()){
+		if(inProgress.lastIsNg()){      //if last place queen is illegal, no solutions with this board
 			System.out.println( "  for debugging: base case detected for..."
                               + System.lineSeparator()
                               + inProgress
                               );
 			return;
 		}
-		if(inProgress.accept()){
-			solutions.add(inProgress);
+		if(inProgress.accept()){        //if board is legal, record the solution
+			solutions.add(inProgress); 
             // your code here
             // action(s) for base case(s)
             System.out.println( "  for debugging: base case detected for..."
@@ -76,15 +76,14 @@ public class SolverForQueensPuzzle {
                               );
 							  return;
 		}
-		else{
+		else{                          
             // action for recursive cases
 		for(int index = 0; index < inProgress.ranks(); index++){
 			BoardForQueensPuzzle snapshot = new BoardForQueensPuzzle(inProgress);
-			inProgress.populate(index);
-			recordSolutionsStarted();
-			inProgress = snapshot;
+			inProgress.populate(index);      //place a queen file index
+			recordSolutionsStarted();        //recordSolutionsStarted on the new inProgress board with the new queen
+			inProgress = snapshot;          
 		}
-            // your code here
             System.out.println( "  for debugging: recursive case detected for..."
                               + System.lineSeparator()
                               + inProgress
